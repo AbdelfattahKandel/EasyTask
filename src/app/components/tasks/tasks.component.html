@@ -1,0 +1,22 @@
+<section id="tasks">
+    <header>
+        <h2>{{ name }}'s Tasks</h2>
+        <menu>
+            <app-add-task (add)="onAddTask()"></app-add-task>
+        </menu>
+    </header>
+    @if (showAddPopup) {
+      <app-add-task-popup [userId]="userId" (addTask)="onAddTaskPopup($event)"></app-add-task-popup>
+    }
+    @if (tasks.length > 0) {
+      <ul>
+          @for (task of tasks; track task.id) {
+          <li>
+              <app-task [task]="task" (delete)="onDeleteTask($event)" (complete)="onCompleteTask($event)"></app-task>
+          </li>
+          }
+      </ul>
+    } @else {
+      <div class="no-tasks">No tasks for this user.</div>
+    }
+</section>
